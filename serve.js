@@ -23,28 +23,9 @@ const webpackmiddleware = webpack({
   }
 });
 
-async function foo(ctx, next) {
-  const rows = await knex('products')
-  ctx.body = rows
-}
+const handlers = require('handlers')
 
-router.get('/products', foo)
-
-// router.get('/products', (ctx, next) => {
-//   const rows = await knex('products')
-//   // console.log("querying")
-//   // pool.query("select * from products", (err,rows) => {
-//   // console.log("got something")
-//   //  if(err) {
-//   //      return res.json({'error': true, 'message': 'Error occurred'+err});
-//   //  }
-//   // console.log("OK DUDE")
-//   //  ctx.body = 'rows'
-//   // })
-//   ctx.body = rows
-//
-// });
-//
+router.get('/products', handlers.getProducts(knex))
 
 app.use(router.routes())
 app.use(router.allowedMethods());

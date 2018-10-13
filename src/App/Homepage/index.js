@@ -24,7 +24,7 @@ import {
   Visibility
 } from 'semantic-ui-react';
 
-import logo from 'assets/logo.svg';
+import logo from 'assets/bob_logo.png';
 import nanImage from 'assets/nan.jpg';
 
 const HomepageHeading = ({ mobile }) => (
@@ -97,8 +97,8 @@ class DesktopContainer extends React.Component {
     }
     `}</style>
 
+    <Image src={logo} />
     <Header as='h2' icon inverted textAlign='center'>
-      <Icon name='grid layout' />
       Advanced Grid
       <Header.Subheader>
         This page contains some helpful examples that can be usefull for advanced layouts.
