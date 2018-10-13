@@ -6,7 +6,7 @@ const router = new Router();
 const webpack = require('koa-webpack'); // eslint-disable-line
 const historyApiFallback = require('./history-middleware');
 
-require('app-module-path').addPath(__dirname + "/lib");
+require('app-module-path').addPath(__dirname);
 
 const knex = require('knex')(require('./knexfile'))
 
@@ -25,7 +25,7 @@ const webpackmiddleware = webpack({
 
 const handlers = require('handlers')
 
-router.get('/products', handlers.getProducts(knex))
+router.get('/products', handlers.getProducts)
 
 app.use(router.routes())
 app.use(router.allowedMethods());

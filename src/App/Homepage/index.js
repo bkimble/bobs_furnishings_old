@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Alert from 'react-bootstrap/lib/Alert';
-
-// <Alert bsStyle="warning">
-//   <strong>Holy guacamole!</strong> Best check yo self, you're not looking too
-//   good.
-// </Alert>;
+import ProductList from 'components/ProductList';
 
 import {
   Button,
@@ -98,6 +94,39 @@ class DesktopContainer extends React.Component {
     `}</style>
 
     <Image src={logo} />
+    <Header as='h2' inverted textAlign='center'>
+      Products
+    </Header>
+    <ProductList />
+    </Container>
+  );
+  }
+
+  ikdrender() {
+    return (
+ <Container>
+    {/* Heads up! We apply there some custom styling, you usually will not need it. */}
+    <style>{`
+      html, body {
+        background-color: #252839 !important;
+      }
+      p {
+        align-content: center;
+        background-color: #495285;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 6em;
+      }
+      p > span {
+        opacity: 0.4;
+        text-align: center;
+      }
+    }
+    `}</style>
+
+    <Image src={logo} />
     <Header as='h2' icon inverted textAlign='center'>
       Advanced Grid
       <Header.Subheader>
@@ -105,7 +134,7 @@ class DesktopContainer extends React.Component {
       </Header.Subheader>
     </Header>
     <Divider />
-
+    <ProductList />
     <Header as='h2' inverted textAlign='center'>
       Basic 16
     </Header>
