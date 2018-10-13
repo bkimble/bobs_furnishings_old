@@ -8,9 +8,8 @@ const products = [
   {id: 5, name: "Queen Bed", description: loremIpsum({count: 4}), price: 500},
   {id: 6, name: "Sofa", description: loremIpsum({count: 4}), price: 43},
   {id: 7, name: "Decent Washer", description: loremIpsum({count: 4}), price: 100},
-  {id: 7, name: "Middle of the Road Washer", description: loremIpsum({count: 4}), price: 200},
-  {id: 7, name: "Wow! Amazing Washer", description: loremIpsum({count: 4}), price: 300},
-  
+  {id: 8, name: "Middle of the Road Washer", description: loremIpsum({count: 4}), price: 200},
+  {id: 9, name: "Wow! Amazing Washer", description: loremIpsum({count: 4}), price: 300},
 ]
 
 const product_variations = [
