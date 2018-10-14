@@ -45,7 +45,6 @@
     "mobx-react-router": "4.0.3",
     "mobx-utils": "4.0.1",
     "mysql": "^2.16.0",
-    "mysql-migrations": "^1.0.6",
     "raw-loader": "0.5.1",
     "react": "16.3.2",
     "react-bootstrap": "^0.32.4",

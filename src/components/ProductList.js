@@ -3,8 +3,6 @@ import PageCenter from 'components/PageCenter';
 import PageLoader from 'components/PageLoader';
 import Product from 'components/Product'
 
-
-
 import {
   Button,
   Container,
@@ -22,33 +20,35 @@ import {
 } from 'semantic-ui-react';
 export default class ProductList extends React.Component {
 	constructor(props) {
-	    // Required step: always call the parent class' constructor
-	    super(props);
-		this.state = {
-			products: [],
-			isLoaded: false,
-			error: null
-		}
-	}
-	
-    componentDidMount() {
-      fetch("/products")
-        .then(res => res.json())
-        .then(
-          (result) => {
-            this.setState({products: result, isLoaded: true});
-          },
-          (error) => {
-            this.setState({
-              error,
-				isLoaded: true
-            });
-          }
-        )
+    // Required step: always call the parent class' constructor
+    super(props);
+    this.state = {
+      products: [],
+	    isLoaded: false,
+	    error: null
     }
+  }
+	
+  componentDidMount() {
+    fetch("/products")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({products: result, isLoaded: true});
+        },
+        (error) => {
+          this.setState({
+            error,
+            isLoaded: true
+          });
+        }
+      )
+  }
 	
   render() {
-	  const { error, isLoaded, products } = this.state;
+	  const { error, isLoaded } = this.state;
+    let products = [...this.state.products];
+    
 	  if (error) {
 		  return <div>Error: {error.message}</div>;
 	  } else if (!isLoaded) {
@@ -58,15 +58,14 @@ export default class ProductList extends React.Component {
 	      while (products.length) {
 	          finalProducts.push(products.splice(0, 3))
 	      }
-
 	      return(
 	        <div>
-	          <Grid celled columns={3}>
-	          {finalProducts.map(row => {
+	          <Grid columns={3} divided>
+	          {finalProducts.map((row, index) => {
 	            return (
-	              <Grid.Row>
+	              <Grid.Row key={index} textAlign="center" stretched>
 	              {row.map(product => {
-	                return (<Product values={product} />)
+                  return (<Product values={product} key={product.product_variation_id} addToCart={this.props.addToCart} />)
 	              })}
 	              </Grid.Row>
 	            );
