@@ -16,7 +16,7 @@ export default class AddToCartButton extends React.Component {
   
   render() {
     return(
-       <Button primary onClick={() => { this.props.addToCart(this.props.sku) }}>Add to Cart</Button>
+       <Button primary onClick={() => { this.props.addToCart(this.props.product) }}>Add to Cart</Button>
     )
   }
 }

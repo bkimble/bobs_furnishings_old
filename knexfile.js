@@ -1,7 +1,7 @@
 // Update with your config settings.
 
 require('app-module-path').addPath(__dirname + "/lib");
-config = require('lib/config')
+config = require('./lib/config')
 
 module.exports = {
   client: 'mysql',
