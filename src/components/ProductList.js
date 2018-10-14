@@ -30,7 +30,7 @@ export default class ProductList extends React.Component {
   }
 	
   componentDidMount() {
-    fetch("/products")
+    fetch("/api/products")
       .then(res => res.json())
       .then(
         (result) => {
@@ -44,7 +44,6 @@ export default class ProductList extends React.Component {
         }
       )
   }
-	
   render() {
 	  const { error, isLoaded } = this.state;
     let products = [...this.state.products];

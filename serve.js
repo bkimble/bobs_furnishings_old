@@ -25,12 +25,12 @@ const webpackmiddleware = webpack({
 
 const handlers = require('handlers')
 
-router.get('/products', handlers.getProducts)
+router.get('/api/products', handlers.getProducts)
 
 app.use(router.routes())
 app.use(router.allowedMethods());
-app.use(webpackmiddleware);
 app.use(historyApiFallback({ index: '/' }));
+app.use(webpackmiddleware);
 
 app.listen(APP_PORT, HOST);
 

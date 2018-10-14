@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Alert from 'react-bootstrap/lib/Alert';
 import ProductList from 'components/ProductList';
 import MiniCart from 'components/MiniCart';
+import AppWrapper from 'components/AppWrapper'
+import { observer, inject } from 'mobx-react';
 
 import {
   Button,
@@ -22,12 +24,13 @@ import {
 } from 'semantic-ui-react';
 
 import logo from 'assets/logo.png';
-import nanImage from 'assets/nan.jpg';
 
 /* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
  */
+@inject('routing', 'me')
+@observer
 class DesktopContainer extends React.Component {
   state = {};
 
@@ -35,32 +38,15 @@ class DesktopContainer extends React.Component {
 
   showFixedMenu = () => this.setState({ fixed: true });
   
-  constructor(props) {
-    super(props)
-    this.state = {
-      cart: []
-    }
-    this.addToCart = this.addToCart.bind(this);
-  }
-  
-  addToCart(item) {
-    const cart = this.state.cart
-    cart.push(item);
-    this.setState({
-      cart
-    })
-  }
-  
   render() {
+
     return (
-      <Container align='center'>
-      <MiniCart cart={this.state.cart} />
-      <Image src={logo} align='center' />
-      <Header as='h2' inverted textAlign='center'>
-        Products
-      </Header>
-      <ProductList addToCart={this.addToCart} />
-      </Container>
+      <AppWrapper>
+        <Header as='h2' inverted textAlign='center'>
+          Products
+        </Header>
+        <ProductList addToCart={this.props.addToCart} />
+      </AppWrapper>
     );
   }
 };

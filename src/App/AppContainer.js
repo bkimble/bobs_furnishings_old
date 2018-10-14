@@ -14,14 +14,8 @@ import AuthSwitchRoute from 'components/routes/AuthSwitch';
 import Protected from 'components/routes/Protected';
 
 import Homepage from './Homepage';
-import Dashboard from './Dashboard';
-import Settings from './Settings';
-import Login from './Auth/Login';
-import Logout from './Auth/Logout';
-import Register from './Auth/Register';
-import ForgotPassword from './Auth/ForgotPassword';
-import Signup from './Auth/Signup';
-import ResetPassword from './Auth/ResetPassword';
+import Product from './Product'
+import Cart from './Cart'
 
 import AuthStore from 'stores/Auth';
 import appSession from 'stores/AppSession';
@@ -45,19 +39,10 @@ const App = () => (
   <Provider {...stores}>
     <Router history={history}>
       <Boot>
-        <AuthSwitchRoute
-          exact
-          path="/"
-          loggedIn={Dashboard}
-          loggedOut={Homepage}
-        />
-        <Protected exact path="/settings" component={Settings} />
-        <Route exact path="/logout" component={Logout} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/reset-password" component={ResetPassword} />
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/product" component={Product} />
+        <Route exact path="/cart" component={Cart} />
+
       </Boot>
     </Router>
   </Provider>
