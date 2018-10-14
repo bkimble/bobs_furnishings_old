@@ -64,7 +64,7 @@ export default class ProductList extends React.Component {
 	            return (
 	              <Grid.Row key={index} textAlign="center" stretched>
 	              {row.map(product => {
-                  return (<Product values={product} key={product.product_variation_id} addToCart={this.props.addToCart} />)
+                  return (<Product values={product} key={product.product_variation_id} />)
 	              })}
 	              </Grid.Row>
 	            );

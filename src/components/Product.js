@@ -24,7 +24,7 @@ export default class Product extends React.Component {
             <Card.Meta>${this.props.values.price}</Card.Meta>
           </Card.Content>
           <Card.Content extra>
-            <AddToCartButton addToCart={this.props.addToCart} product={this.props.values} />
+            <AddToCartButton product={this.props.values} />
           </Card.Content>
         </Card>      
       </Grid.Column>

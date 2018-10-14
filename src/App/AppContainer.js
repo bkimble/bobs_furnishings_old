@@ -20,6 +20,7 @@ import Cart from './Cart'
 import AuthStore from 'stores/Auth';
 import appSession from 'stores/AppSession';
 import MeStore from 'stores/Me';
+import CartStore from 'stores/CartStore';
 
 configure({
   enforceActions: 'strict'
@@ -32,7 +33,8 @@ const stores = {
   appSession,
   routing,
   auth: new AuthStore(),
-  me: new MeStore()
+  me: new MeStore(),
+  cart: new CartStore()
 };
 
 const App = () => (
