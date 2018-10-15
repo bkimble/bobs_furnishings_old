@@ -10,9 +10,6 @@ import { hot } from 'react-hot-loader';
 import { observer, inject } from 'mobx-react';
 import Boot from 'components/Boot';
 
-import AuthSwitchRoute from 'components/routes/AuthSwitch';
-import Protected from 'components/routes/Protected';
-
 import Homepage from './Homepage';
 import Product from './Product'
 import Cart from './Cart'

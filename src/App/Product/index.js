@@ -2,8 +2,6 @@ import React from 'react';
 import { Segment, Message, Grid, Image, Header } from 'semantic-ui-react';
 import { observer, inject } from 'mobx-react';
 
-import PageCenter from 'components/PageCenter';
-import LogoTitle from 'components/LogoTitle';
 import AppWrapper from 'components/AppWrapper';
 import { Form } from 'react-final-form';
 import { Link } from 'react-router-dom';
@@ -33,6 +31,7 @@ class VariationPicker extends React.Component {
   
   render() {
     const facets = this.getFacets()
+    
     console.log(facets)
     return (
       <div>Variations here</div>

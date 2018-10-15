@@ -2,7 +2,6 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import { Link, withRouter } from 'react-router-dom';
 import { Container, Dropdown, Icon, Menu, Image } from 'semantic-ui-react';
-import logoInverted from 'assets/logo.svg';
 import MiniCart from 'components/MiniCart';
 
 import logo from 'assets/logo.png';
