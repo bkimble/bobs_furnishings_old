@@ -46,7 +46,7 @@ class App extends React.Component {
         <Router history={history}>
           <Boot>
             <Route exact path="/" component={Homepage} />
-            <Route exact path="/product" component={Product} />
+            <Route exact path="/product/:sku" component={Product} />
             <Route exact path="/cart" component={Cart} />
           </Boot>
         </Router>

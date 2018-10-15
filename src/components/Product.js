@@ -18,7 +18,7 @@ export default class Product extends React.Component {
     return(
       <Grid.Column key={this.props.values.product_variation_id} textAlign="bottom">
         <Card height="200px">
-          <Image src={require(`assets/product_images/${this.props.values.img}`)} onClick={() => this.props.routing.push({pathname:'/product', state: { product: this.props.values, variations: this.props.variations}})} rounded/>
+          <Image src={require(`assets/product_images/${this.props.values.img}`)} onClick={() => this.props.routing.push({pathname:`/product/${this.props.values.sku}`, state: { product: this.props.values, variations: this.props.variations}})} rounded/>
           <Card.Content>
             <Card.Header>{this.props.values.name}</Card.Header>
             <Card.Meta>${this.props.values.price}</Card.Meta>
