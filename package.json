@@ -43,6 +43,7 @@
     "mobx-react": "5.1.2",
     "mobx-react-devtools": "5.0.1",
     "mobx-react-router": "4.0.3",
+    "mobx-sync": "^1.0.0",
     "mobx-utils": "4.0.1",
     "mysql": "^2.16.0",
     "raw-loader": "0.5.1",

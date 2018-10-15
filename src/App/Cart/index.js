@@ -5,6 +5,8 @@ import {
   Segment,
   List,
   Image,
+  Input,
+  Table,
   Button
 } from 'semantic-ui-react';
 import { observer, inject } from 'mobx-react';
@@ -13,39 +15,48 @@ import { observer, inject } from 'mobx-react';
 @inject('cart')
 @observer
 export default class Cart extends React.Component {
-  constructor(props) {
-    super(props)
-     this.foo = this.foo.bind(this);
+  
+  removeItem(sku) {
+    this.props.cart.remove(sku)
   }
   
-  foo() {
-    console.log(this.props.cart.items)
+  changeQty(sku, e) {
+    this.props.cart.update(sku, e.target.value);
   }
-  
+
   render() {
     const items = this.props.cart.items.map(item =>
-      <List.Item>
-        <List.Content floated='right'>
-          <Button>Add</Button>
-        </List.Content>
-        <Image avatar floated="left" src={require(`assets/product_images/${item.img}`)} />
-        <List.Content floated="left">{item.name}</List.Content>
-        <List.Content floated="left">{item.price}</List.Content>
-        <List.Content floated="left">{item.qty}</List.Content>
-      </List.Item>
+          <Table.Row>
+            <Table.Cell selectable negative textAlign="center" width="one">
+              <div onClick={() => { this.removeItem(item.sku) }}>X</div>
+            </Table.Cell>
+            <Table.Cell><Image avatar src={require(`assets/product_images/${item.img}`)} /> {item.name}</Table.Cell>
+            <Table.Cell>{item.price}</Table.Cell>
+      <Table.Cell width="one"><Input placeholder={item.qty} onChange={this.changeQty.bind(this, item.sku) } /></Table.Cell>
+          </Table.Row>
     )
 
-		return(		
+		return(
       <AppWrapper>
         <Header as='h2' inverted textAlign='center'>
           Shopping Cart
         </Header>
-        <Button onClick={this.foo} />
-        <Segment inverted>
-        <List divided verticalAlign='middle' textAlign="left">
-          {items}
-        </List>
-        </Segment>
+      
+    <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Del</Table.HeaderCell>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>Price</Table.HeaderCell>
+            <Table.HeaderCell>Qty</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+        {items}
+        </Table.Body>
+      </Table>
+
       </AppWrapper> 
 	    )
   }

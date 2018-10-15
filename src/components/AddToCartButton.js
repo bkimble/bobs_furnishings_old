@@ -10,7 +10,6 @@ import {
   Button
 } from 'semantic-ui-react';
 
-
 @inject('cart')
 @observer 
 export default class AddToCartButton extends React.Component {
@@ -21,7 +20,6 @@ export default class AddToCartButton extends React.Component {
   
   addToCart(item) {
     this.props.cart.add(item)
-    console.log(this.props.cart.count)
   }
   
   render() {

@@ -7,7 +7,7 @@ import { syncHistoryWithStore, RouterStore } from 'mobx-react-router';
 import { configure } from 'mobx';
 import React from 'react';
 import { hot } from 'react-hot-loader';
-
+import { observer, inject } from 'mobx-react';
 import Boot from 'components/Boot';
 
 import AuthSwitchRoute from 'components/routes/AuthSwitch';
@@ -37,17 +37,25 @@ const stores = {
   cart: new CartStore()
 };
 
-const App = () => (
-  <Provider {...stores}>
-    <Router history={history}>
-      <Boot>
-        <Route exact path="/" component={Homepage} />
-        <Route exact path="/product" component={Product} />
-        <Route exact path="/cart" component={Cart} />
+// Store all mobx stores to local storage for data persistence after refreshing / reloading page
+import { AsyncTrunk } from 'mobx-sync'
+const trunk = new AsyncTrunk(stores);
+trunk.init();
 
-      </Boot>
-    </Router>
-  </Provider>
-);
+class App extends React.Component {
+  render() {
+    return(
+      <Provider {...stores}>
+        <Router history={history}>
+          <Boot>
+            <Route exact path="/" component={Homepage} />
+            <Route exact path="/product" component={Product} />
+            <Route exact path="/cart" component={Cart} />
+          </Boot>
+        </Router>
+      </Provider>
+    )
+  }
+}
 
 export default hot(module)(App);
