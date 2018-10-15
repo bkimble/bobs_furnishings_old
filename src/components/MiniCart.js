@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react';
 @observer
 export default class MiniCart extends React.Component {
   render() {
-		return(		
+		return(
 	       <span className="miniCart" onClick={() => this.props.routing.push('/cart')} >Cart ({this.props.cart.count} items)</span>
 	    )
   }

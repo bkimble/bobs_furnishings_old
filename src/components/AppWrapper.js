@@ -13,12 +13,14 @@ import 'assets/application.less';
 export default class AppWrapper extends React.Component {
   render() {
     return (
+      <div>
+      <MiniCart />
       <Container align='center'>
-        <MiniCart />
         <div className="header"></div>
         <Image src={logo} align='center' />
         {this.props.children}
       </Container>
+        </div>
     );
   }
 }

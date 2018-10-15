@@ -1,0 +1,3 @@
+lib/public/*
+lib/client.js
+lib/client/vendor

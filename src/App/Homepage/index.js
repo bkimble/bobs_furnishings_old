@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Alert from 'react-bootstrap/lib/Alert';
 import ProductList from 'components/ProductList';
-import MiniCart from 'components/MiniCart';
 import AppWrapper from 'components/AppWrapper'
 import { observer, inject } from 'mobx-react';
 
@@ -17,6 +16,7 @@ import {
   Image,
   List,
   Menu,
+  Breadcrumb,
   Responsive,
   Segment,
   Sidebar,
@@ -33,13 +33,7 @@ import logo from 'assets/logo.png';
 @observer
 class DesktopContainer extends React.Component {
   state = {};
-
-  hideFixedMenu = () => this.setState({ fixed: false });
-
-  showFixedMenu = () => this.setState({ fixed: true });
-  
   render() {
-
     return (
       <AppWrapper>
         <Header as='h2' inverted textAlign='center'>

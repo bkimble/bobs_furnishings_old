@@ -26,6 +26,8 @@ const webpackmiddleware = webpack({
 const handlers = require('handlers')
 
 router.get('/api/products', handlers.getProducts)
+router.get('/api/product/:sku', handlers.getProduct)
+router.get('/api/variations/:product_id', handlers.getVariations)
 
 app.use(router.routes())
 app.use(router.allowedMethods());
