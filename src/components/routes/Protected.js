@@ -5,11 +5,11 @@ import { Route } from 'react-router-dom';
 @inject('appSession', 'routing')
 @observer
 export default class AuthSwitchRoute extends React.Component {
-  render() {
-    const { appSession, routing, ...rest } = this.props;
-    if (!appSession.token) {
-      return routing.push('/');
+    render() {
+        const { appSession, routing, ...rest } = this.props;
+        if (!appSession.token) {
+            return routing.push('/');
+        }
+        return <Route {...rest} />;
     }
-    return <Route {...rest} />;
-  }
 }

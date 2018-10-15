@@ -11,16 +11,16 @@ import 'assets/application.less';
 @withRouter
 @observer
 export default class AppWrapper extends React.Component {
-  render() {
-    return (
-      <div>
-      <MiniCart />
-      <Container align='center'>
-        <div className="header"></div>
-        <Image src={logo} align='center' />
-        {this.props.children}
-      </Container>
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <MiniCart />
+                <Container align='center'>
+                    <div className="header"></div>
+                    <Image src={logo} align='center' />
+                    {this.props.children}
+                </Container>
+            </div>
+        );
+    }
 }

@@ -8,33 +8,33 @@ import PageLoader from 'components/PageLoader';
 @withRouter
 @observer
 export default class Boot extends React.Component {
-  componentWillMount() {
-    this.handleLoading();
-  }
+    componentWillMount() {
+        this.handleLoading();
+    }
 
-  componentWillReact() {
-    this.handleLoading();
-  }
+    componentWillReact() {
+        this.handleLoading();
+    }
 
-  handleLoading() {
-    const { appSession, me } = this.props;
-    if (appSession.token) {
-      me.fetch().then(() => {
+    handleLoading() {
+        const { appSession, me } = this.props;
+        if (appSession.token) {
+            me.fetch().then(() => {
+                appSession.setLoaded();
+            });
+            return;
+        }
         appSession.setLoaded();
-      });
-      return;
     }
-    appSession.setLoaded();
-  }
 
-  render() {
-    if (!this.props.appSession.loaded) {
-      return (
-        <PageCenter>
-          <PageLoader />
-        </PageCenter>
-      );
+    render() {
+        if (!this.props.appSession.loaded) {
+            return (
+                <PageCenter>
+                    <PageLoader />
+                </PageCenter>
+            );
+        }
+        return <Switch>{this.props.children}</Switch>;
     }
-    return <Switch>{this.props.children}</Switch>;
-  }
 }

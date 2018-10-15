@@ -5,32 +5,32 @@ class AppSession {
   @observable loaded;
 
   constructor() {
-    reaction(
-      () => this.token,
-      (token) => {
-        if (token) {
-          window.localStorage.setItem('jwt', token);
-        } else {
-          window.localStorage.removeItem('jwt');
-        }
-      }
-    );
+      reaction(
+          () => this.token,
+          (token) => {
+              if (token) {
+                  window.localStorage.setItem('jwt', token);
+              } else {
+                  window.localStorage.removeItem('jwt');
+              }
+          }
+      );
   }
 
   @action
   setToken(token) {
-    this.token = token;
+      this.token = token;
   }
 
   @action
   setLoaded() {
-    this.loaded = true;
+      this.loaded = true;
   }
 
   @action
   reset() {
-    this.token = null;
-    this.loaded = null;
+      this.token = null;
+      this.loaded = null;
   }
 }
 

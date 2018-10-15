@@ -7,18 +7,18 @@ export default class MeStore extends BaseStore {
 
   @action
   fetch(statusKey) {
-    const status = this.createStatus(statusKey);
-    return request({
-      method: 'GET',
-      path: '/1/users/me'
-    })
-      .then((resp) => {
-        this.user = resp.data;
-        status.success();
+      const status = this.createStatus(statusKey);
+      return request({
+          method: 'GET',
+          path: '/1/users/me'
       })
-      .catch((err) => {
-        status.error(err);
-        return err;
-      });
+          .then((resp) => {
+              this.user = resp.data;
+              status.success();
+          })
+          .catch((err) => {
+              status.error(err);
+              return err;
+          });
   }
 }

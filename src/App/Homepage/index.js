@@ -3,24 +3,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Alert from 'react-bootstrap/lib/Alert';
 import ProductList from 'components/ProductList';
-import AppWrapper from 'components/AppWrapper'
+import AppWrapper from 'components/AppWrapper';
 import { observer, inject } from 'mobx-react';
 
 import {
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Breadcrumb,
-  Responsive,
-  Segment,
-  Sidebar,
-  Visibility
+    Button,
+    Container,
+    Divider,
+    Grid,
+    Header,
+    Icon,
+    Image,
+    List,
+    Menu,
+    Breadcrumb,
+    Responsive,
+    Segment,
+    Sidebar,
+    Visibility
 } from 'semantic-ui-react';
 
 import logo from 'assets/logo.png';
@@ -34,26 +34,26 @@ import logo from 'assets/logo.png';
 class DesktopContainer extends React.Component {
   state = {};
   render() {
-    return (
-      <AppWrapper>
-        <Header as='h2' inverted textAlign='center'>
+      return (
+          <AppWrapper>
+              <Header as='h2' inverted textAlign='center'>
           Products
-        </Header>
-        <ProductList addToCart={this.props.addToCart} />
-      </AppWrapper>
-    );
+              </Header>
+              <ProductList addToCart={this.props.addToCart} />
+          </AppWrapper>
+      );
   }
-};
+}
 
 const ResponsiveContainer = ({ children }) => (
-  <div>
-    <DesktopContainer>{children}</DesktopContainer>
-  </div>
+    <div>
+        <DesktopContainer>{children}</DesktopContainer>
+    </div>
 );
 
 ResponsiveContainer.propTypes = {
-  children: PropTypes.node
+    children: PropTypes.node
 };
 
 
-export default ResponsiveContainer
+export default ResponsiveContainer;
