@@ -24,17 +24,29 @@ export default class ProductList extends React.Component {
     super(props);
     this.state = {
       products: [],
+      groupedProducts: {},
 	    isLoaded: false,
 	    error: null
     }
   }
-	
+  
+  groupProductsByProductId(products) {
+    let grouped = {}
+    products.forEach(product => {
+      if (!grouped[product.product_id]) {
+        grouped[product.product_id] = []
+      }
+      grouped[product.product_id].push(product)
+    })
+    return grouped;
+  }
+
   componentDidMount() {
     fetch("/api/products")
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({products: result, isLoaded: true});
+          this.setState({products: result, groupedProducts: this.groupProductsByProductId(result), isLoaded: true});
         },
         (error) => {
           this.setState({
@@ -44,6 +56,7 @@ export default class ProductList extends React.Component {
         }
       )
   }
+  
   render() {
 	  const { error, isLoaded } = this.state;
     let products = [...this.state.products];
@@ -64,7 +77,7 @@ export default class ProductList extends React.Component {
 	            return (
 	              <Grid.Row key={index} textAlign="center" stretched>
 	              {row.map(product => {
-                  return (<Product values={product} key={product.product_variation_id} />)
+                  return (<Product values={product} variations={this.state.groupedProducts[product.product_id]} key={product.product_variation_id} />)
 	              })}
 	              </Grid.Row>
 	            );

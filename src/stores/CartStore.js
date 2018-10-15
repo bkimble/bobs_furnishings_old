@@ -38,6 +38,16 @@ export default class CartStore {
     }
   }
 
+  @computed
+  get total() {
+    let total = 0;
+    for (var e of this.cart.entries()) {
+      total += parseFloat(e[1].price) * parseInt(e[1].qty)
+    }
+    return total
+  }
+
+
   @computed 
   get count() {
     let count = 0;
