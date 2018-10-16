@@ -16,8 +16,8 @@ export default class AppWrapper extends React.Component {
             <div>
                 <MiniCart />
                 <Container align='center'>
-                    <div className="header"></div>
                     <Image src={logo} align='center' />
+          <div></div>
                     {this.props.children}
                 </Container>
             </div>

@@ -1,17 +1,17 @@
-import { observable, action, reaction, computed } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 export default class CartStore {
-	@observable cart = observable.map()
+  @observable cart = observable.map()
 
   @action
-	add(item) {
-	    const val = this.cart.get(item.sku);
-	    if (val !== undefined) {
-	        this.cart.set(item.sku, {name: item.name, price: item.price, qty: val.qty+1, img: item.img});
-	    } else {
-	        this.cart.set(item.sku, {name: item.name,  price: item.price, qty: 1, img: item.img});
-	    }
-	}
+  add(item) {
+      const val = this.cart.get(item.sku);
+      if (val !== undefined) {
+          this.cart.set(item.sku, {name: item.name, price: item.price, qty: parseInt(val.qty, 10) +1, img: item.img});
+      } else {
+          this.cart.set(item.sku, {name: item.name,  price: item.price, qty: 1, img: item.img});
+      }
+  }
 
   @computed
   get items() {
@@ -42,7 +42,7 @@ export default class CartStore {
   get total() {
       let total = 0;
       for (const e of this.cart.entries()) {
-          total += parseFloat(e[1].price) * parseInt(e[1].qty);
+          total += parseFloat(e[1].price) * parseInt(e[1].qty, 10);
       }
       return total;
   }
@@ -52,10 +52,9 @@ export default class CartStore {
   get count() {
       let count = 0;
       for (const e of this.cart.entries()) {
-          count += parseInt(e[1].qty);
+          count += parseInt(e[1].qty, 10);
       }
       return count;
   }
 }
 
-const cartStore = new CartStore();

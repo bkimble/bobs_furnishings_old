@@ -23,12 +23,6 @@ import {
     Visibility
 } from 'semantic-ui-react';
 
-import logo from 'assets/logo.png';
-
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
 @inject('routing', 'me')
 @observer
 class DesktopContainer extends React.Component {
@@ -39,21 +33,21 @@ class DesktopContainer extends React.Component {
               <Header as='h2' inverted textAlign='center'>
           Products
               </Header>
+                <Grid className="breadcrumbs">
+                  <Grid.Row>
+                    <Grid.Column textAlign="left">
+                      <Breadcrumb size='huge'>
+                        <Breadcrumb.Section>Home</Breadcrumb.Section>
+                      </Breadcrumb>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+        
+        
               <ProductList addToCart={this.props.addToCart} />
           </AppWrapper>
       );
   }
 }
 
-const ResponsiveContainer = ({ children }) => (
-    <div>
-        <DesktopContainer>{children}</DesktopContainer>
-    </div>
-);
-
-ResponsiveContainer.propTypes = {
-    children: PropTypes.node
-};
-
-
-export default ResponsiveContainer;
+export default DesktopContainer;

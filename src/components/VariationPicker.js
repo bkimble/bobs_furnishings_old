@@ -10,7 +10,6 @@ import { Form } from 'react-final-form';
 import { Link } from 'react-router-dom';
 import request from 'utils/request';
 
-
 @inject('routing')
 @observer
 
@@ -21,7 +20,8 @@ export default class VariationPicker extends React.Component {
         this.state = {
             product: props.product,
             variations: undefined,
-            variationsLoaded: false
+            variationsLoaded: false,
+            err: null
         };
 
         this.facetWhitelist = {
@@ -30,7 +30,7 @@ export default class VariationPicker extends React.Component {
     }
 
     componentWillMount() {
-    // Was a product passed in? if not, fetch the product - user is deep linking to this route
+      // Was a product passed in? if not, fetch the product - user is deep linking to this route
         if(this.state.variations === undefined) {
             request({
                 method: 'GET',
@@ -67,17 +67,15 @@ export default class VariationPicker extends React.Component {
                     let thisLabel;
 
                     if (facetField == 'img') {
-                        thisLabel = <div><Image avatar src={require(`assets/product_images/${v.img}`)} /><List.Header>{attributes[k]}</List.Header></div>;
+                        thisLabel = <div><Image avatar src={require(`assets/product_images/${v.img}`)} /><div className="attributeValue">{attributes[k]}</div></div>;
                     } else {
                         thisLabel = attributes[k];
                     }
-
-                    const className = v.sku == this.state.product.sku ? 'selected' : '';
+                    
                     facets[k].push(
-                        <List.Item key={v.sku} className={className}>
+                        <List.Item key={v.sku}>
                             <List.Content>
                                 <div onClick={() => { this.openVariation(v, this.props.variations);   }}>{thisLabel}</div>
-
                             </List.Content>
                         </List.Item>
                     );
@@ -94,11 +92,13 @@ export default class VariationPicker extends React.Component {
             const facetGroups = [];
             for(const k in facets) {
                 facetGroups.push(
-                    <div key={k}>{k}: <List horizontal className="productVariations" key={k}>{facets[k]}</List></div>
+                    <div key={k}><List horizontal className="productVariations" key={k}>{facets[k]}</List></div>
                 );
             }
             return (<div>{facetGroups}</div>
             );
+        } else if(this.state.err) {
+          this.stat
         } else {
             return (
                 <div>Loading .. </div>

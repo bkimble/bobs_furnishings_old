@@ -4,8 +4,11 @@ import {
     Header,
     Segment,
     List,
+    Grid,
+    Breadcrumb,
     Image,
     Input,
+    Container,
     Table,
     Form,
     Button
@@ -56,8 +59,11 @@ export default class Cart extends React.Component {
     removeItem(sku) {
         this.props.cart.remove(sku);
     }
+    
 
     render() {
+      const {push} = this.props.routing;
+      
         const items = this.props.cart.items.map(item =>
             <Table.Row>
                 <Table.Cell selectable negative textAlign="center" width="one">
@@ -72,37 +78,59 @@ export default class Cart extends React.Component {
         return(
             <AppWrapper>
                 <Header as='h2' inverted textAlign='center'>
-          Shopping Cart
+                  Shopping Cart
                 </Header>
-                <Form>
-                    <Table celled>
-                        <Table.Header>
-                            <Table.Row>
-                                <Table.HeaderCell>Del</Table.HeaderCell>
-                                <Table.HeaderCell>Name</Table.HeaderCell>
-                                <Table.HeaderCell textAlign="right">Price</Table.HeaderCell>
-                                <Table.HeaderCell>Qty</Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Header>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column textAlign="left">
+                      <Breadcrumb size='huge'>
+                        <Breadcrumb.Section link onClick={() => { push({pathname: "/"}) }}>Home</Breadcrumb.Section>
+                        <Breadcrumb.Divider icon='right chevron' />
+                        <Breadcrumb.Section active>Product Detail</Breadcrumb.Section>
+                      </Breadcrumb>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
 
-                        <Table.Body>
-                            {items}
-                            <Table.Row>
-                                <Table.Cell width="one"></Table.Cell>
-                                <Table.Cell></Table.Cell>
-                                <Table.Cell textAlign="right">
-                                    <div>Subtotal: ${this.props.cart.total.toFixed(2)}</div>
-                                    <div>Tax: $0.00</div>
-                                    <div>Shipping: $0.00</div>
-                                    <div>Coupons: $0.00</div>
-                                    <div>Total:  ${this.props.cart.total.toFixed(2)}</div>
-                                </Table.Cell>
-	      <Table.Cell width="one"></Table.Cell>
-                            </Table.Row>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column size={16}>
+                      <Form>
+                          <Table celled>
+                            <Table.Header>
+                                <Table.Row>
+                                    <Table.HeaderCell textAlign="center">Del</Table.HeaderCell>
+                                    <Table.HeaderCell>Name</Table.HeaderCell>
+                                    <Table.HeaderCell textAlign="right">Price</Table.HeaderCell>
+                                    <Table.HeaderCell>Qty</Table.HeaderCell>
+                                </Table.Row>
+                            </Table.Header>
 
-                        </Table.Body>
-                    </Table>
-                </Form>
+                            <Table.Body>
+                                {items}
+                                <Table.Row>
+                                    <Table.Cell width="one"></Table.Cell>
+                                    <Table.Cell></Table.Cell>
+                                    <Table.Cell textAlign="right">
+                                        <div>Subtotal: ${this.props.cart.total.toFixed(2)}</div>
+                                        <div>Tax: $0.00</div>
+                                        <div>Shipping: $0.00</div>
+                                        <div>Coupons: $0.00</div>
+                                        <div>Total:  ${this.props.cart.total.toFixed(2)}</div>
+                                    </Table.Cell>
+    	                            <Table.Cell width="one"></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                          </Table>
+                      </Form>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column size={16} textAlign="right">
+                                <Button primary size="huge">Checkout</Button>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </AppWrapper>
 	    );
     }
