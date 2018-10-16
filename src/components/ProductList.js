@@ -12,6 +12,7 @@ import {
     Header,
     Icon,
     Image,
+  Message,
     List,
     Menu,
     Responsive,
@@ -27,7 +28,7 @@ export default class ProductList extends React.Component {
             products: [],
             groupedProducts: {},
 	    isLoaded: false,
-	    error: null
+	    err: null
         };
     }
 
@@ -59,11 +60,17 @@ export default class ProductList extends React.Component {
     }
 
     render() {
-	  const { error, isLoaded } = this.state;
+	  const { err, isLoaded } = this.state;
         const products = [...this.state.products];
 
-	  if (error) {
-		  return <div>Error: {error.message}</div>;
+	  if (err) {
+		  return (
+        <Message
+          error
+          header='Error'
+          content={err.message}
+        />
+		  )      
 	  } else if (!isLoaded) {
 		  return <div>Loading...</div>;
 	  } else {

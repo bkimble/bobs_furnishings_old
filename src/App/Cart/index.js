@@ -8,6 +8,7 @@ import {
     Breadcrumb,
     Image,
     Input,
+  Message,
     Container,
     Table,
     Form,
@@ -60,38 +61,20 @@ export default class Cart extends React.Component {
         this.props.cart.remove(sku);
     }
     
-
-    render() {
-      const {push} = this.props.routing;
+  
+    getCart() {
+      const items = this.props.cart.items.map(item =>
+          <Table.Row>
+              <Table.Cell selectable negative textAlign="center" width="one">
+                  <div onClick={() => { this.removeItem(item.sku); }}>X</div>
+              </Table.Cell>
+              <Table.Cell><Image avatar src={require(`assets/product_images/${item.img}`)} /> {item.name}</Table.Cell>
+              <Table.Cell textAlign="right">${parseFloat(item.price).toFixed(2)}</Table.Cell>
+              <Table.Cell width="two"><ItemQuantity item={item}/></Table.Cell>
+          </Table.Row>
+      );
       
-        const items = this.props.cart.items.map(item =>
-            <Table.Row>
-                <Table.Cell selectable negative textAlign="center" width="one">
-                    <div onClick={() => { this.removeItem(item.sku); }}>X</div>
-                </Table.Cell>
-                <Table.Cell><Image avatar src={require(`assets/product_images/${item.img}`)} /> {item.name}</Table.Cell>
-                <Table.Cell textAlign="right">${parseFloat(item.price).toFixed(2)}</Table.Cell>
-                <Table.Cell width="two"><ItemQuantity item={item}/></Table.Cell>
-            </Table.Row>
-        );
-
-        return(
-            <AppWrapper>
-                <Header as='h2' inverted textAlign='center'>
-                  Shopping Cart
-                </Header>
-                <Grid>
-                  <Grid.Row>
-                    <Grid.Column textAlign="left">
-                      <Breadcrumb size='huge'>
-                        <Breadcrumb.Section link onClick={() => { push({pathname: "/"}) }}>Home</Breadcrumb.Section>
-                        <Breadcrumb.Divider icon='right chevron' />
-                        <Breadcrumb.Section active>Product Detail</Breadcrumb.Section>
-                      </Breadcrumb>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-
+      return (
                 <Grid>
                   <Grid.Row>
                     <Grid.Column size={16}>
@@ -131,6 +114,39 @@ export default class Cart extends React.Component {
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
+        )
+    } 
+    
+    getEmptyCart() {
+      return (
+        <Message
+          warning
+          header='Cart Empty'
+          content=' There are no items in your shopping cart.'
+        />
+     )
+    }
+      
+    render() {
+      const {push} = this.props.routing;
+        const content = this.props.cart.count == 0 ? this.getEmptyCart() : this.getCart();
+        return(
+            <AppWrapper>
+                <Header as='h2' inverted textAlign='center'>
+                  Shopping Cart
+                </Header>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column textAlign="left">
+                      <Breadcrumb size='huge'>
+                        <Breadcrumb.Section link onClick={() => { push({pathname: "/"}) }}>Home</Breadcrumb.Section>
+                        <Breadcrumb.Divider icon='right chevron' />
+                        <Breadcrumb.Section active>Product Detail</Breadcrumb.Section>
+                      </Breadcrumb>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+                {content}
             </AppWrapper>
 	    );
     }

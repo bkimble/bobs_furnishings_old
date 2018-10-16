@@ -72,17 +72,20 @@ export default class ProductDetail extends React.Component {
     productAttributes() {
       return this.getAttributes().map(a => {
           return (
-              <Grid.Row columns={2}>
-              <Grid.Column>{a[0]}</Grid.Column>
-              <Grid.Column>{a[1]}</Grid.Column>
-            </Grid.Row>
+          <List.Item key={a[0]+a[1]}>
+            <List.Content>
+                  <span>{a[0]}: </span>
+                  <span>{a[1]}</span>
+            </List.Content>
+          </List.Item>
           );
       })
     }
     
     render() {
-        const attributes = this.productAttributes();
         if (this.state.productLoaded) {
+          const attributes = this.productAttributes();
+
             return (
                 <Grid className="productDetail">
                     <Grid.Row>
@@ -97,18 +100,20 @@ export default class ProductDetail extends React.Component {
                         
                         <Segment basic><AddToCartButton product={this.state.product} /></Segment>
                         <Segment basic>
-                          <p>
                           <Header>
                             Description
                           </Header>
 
                           {this.state.product.description}
-                        </p>
                           </Segment>
+
                         <Header>
-                          Product Details:
+                          Product Attributes:
                         </Header>
-                        <Grid celled className="attributeGrid"> {attributes}</Grid>
+
+                          <List celled className="attributeGrid">
+                            {attributes}
+                          </List>
                     </Grid.Column>
                     <Grid.Column width={3}>
                     </Grid.Column>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Image, List} from 'semantic-ui-react';
+import {  Image, List, Message} from 'semantic-ui-react';
 import { observer, inject } from 'mobx-react';
 
 import AppWrapper from 'components/AppWrapper';
@@ -87,7 +87,15 @@ export default class VariationPicker extends React.Component {
     }
 
     render() {
-        if (this.state.variationsLoaded) {
+      if (this.state.err) {
+  		  return (
+          <Message
+            error
+            header='Unable to load Varations'
+            content={this.state.err.message}
+          />
+  		  )
+      } else if (this.state.variationsLoaded) {
             const facets = this.getFacets();
             const facetGroups = [];
             for(const k in facets) {
@@ -95,10 +103,7 @@ export default class VariationPicker extends React.Component {
                     <div key={k}><List horizontal className="productVariations" key={k}>{facets[k]}</List></div>
                 );
             }
-            return (<div>{facetGroups}</div>
-            );
-        } else if(this.state.err) {
-          this.stat
+            return (<div>{facetGroups}</div>);  
         } else {
             return (
                 <div>Loading .. </div>
